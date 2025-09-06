@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>User DashBoard</title>
+</head>
+<body>
+
+    <section class="dashboard d-flex justify-content-center align-items-center">
+		
+	<div class="text-center">
+    
+		    <h1 class="font-weight-bold">Smart Library Management Dash Board</h1>
+			    <p>
+			    		 This system helps you to store and retrieve your books in smart and efficient manner.
+			    </p>
+		    <a href="#" th:href="@{/user/addBook}">
+		    <button class="btn bg-primary btn-lg text-white">Add Book</button>
+		    </a>
+		    
+		    <a href="#" th:href="@{/user/viewBooks/0?sortField=Bid&sortDir=asc}">
+		    <button class="btn bg-primary btn-lg text-white">View Books</button>
+		    </a>
+    
+    </div>
+	
+	    <script>
+    	
+    	$(document).ready(()=>{
+    	$('.item').removeClass('active');
+    	$('#home-link').addClass('active');
+    	})
+    	
+    	</script>
+	
+	</section>
+		
+</body>
+</html>

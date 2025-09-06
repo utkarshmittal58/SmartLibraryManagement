@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Display Contacts</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <section>
+	    
+		<div class="card mr-3 ml-3">
+		 
+			<div class="card-body">
+				
+				<a th:href="@{/user/dashboard}" class="HomeButton">
+				   <i class="fa-solid fa-house" style="font-size: 1.4em;"></i>
+				</a>
+				
+				<h1 class="text-center">Books Available</h1>
+				
+				<div class="search-container my-3">
+					<input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search Your Book Here."  />
+					
+					<div class="search-result">
+						 
+					</div>
+					
+				</div>
+				
+				<div class="table table-responsive">
+				
+					<table class="table table-hover">
+					  <thead class="thead-dark">
+					    <tr>
+					      <th scope="col">
+					      	<a style="color: white;" th:href="@{'/user/viewBooks/'+${currentPage}+'?sortField=Bid&sortDir='+${reverseSortDir}}">ID</a>
+					      </th>
+					      <th scope="col">
+					      	<a style="color: white;" th:href="@{'/user/viewBooks/'+${currentPage}+'?sortField=name&sortDir='+${reverseSortDir}}">Name</a>
+					      </th>
+					      <th scope="col">
+					     	<a style="color: white;" th:href="@{'/user/viewBooks/'+${currentPage}+'?sortField=authorName&sortDir='+${reverseSortDir}}">Author Name</a>
+					      </th>
+					      <th scope="col">
+					      	<a style="color: white;" th:href="@{'/user/viewBooks/'+${currentPage}+'?sortField=cost&sortDir='+${reverseSortDir}}">Cost</a>
+					      </th>
+					      <th scope="col">
+					      	Action
+					      </th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr th:each=" b: ${books}">
+					      <th scope="row" th:text="'LMSUSER'+${b.Bid}" >1</th>
+					      
+					      <td> 
+					      <img src="" class="my_picture" th:src="@{'/image/'+${b.image}}" alt="bookPhoto" />
+					      <a th:href="@{'/user/'+${b.Bid}+'/book/'}" style="color:black" href="#">
+					      <span th:text="${b.name}" ></span>
+					      </a>
+					      </td>
+					      
+					      <td th:text="${b.authorName}" ></td>
+					      
+					      <td th:text="${b.cost}" ></td>
+					      <td>
+					      	  <a th:onclick="|deleteBook(${b.Bid})|">
+						      	<i class="fa-solid fa-trash text-danger" style="font-size: 25px;padding-right:10px;"></i> 
+						      </a> 
+						      <a th:href="@{'/user/update/'+${b.Bid}}">
+						     	 <i class="fa-solid fa-pen-nib" style="font-size: 25px;"></i> 
+						      </a>
+					      </td>
+					    </tr>
+					  </tbody>
+					</table>
+					</div>
+					
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination justify-content-center">
+						  
+						    <li th:if="${currentPage != 0}" class="page-item"><a th:href="@{'/user/viewBooks/'+${currentPage-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}" class="page-link" href="#">Previous</a></li>
+						    
+						    <li th:classappend="${currentPage==i-1}?'active':''"   th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/user/viewBooks/'+${i-1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}" class="page-link" href="#"><span th:text="${i}"></span></a></li>
+						    
+						    <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/user/viewBooks/'+${currentPage+1}+'?sortField='+${sortField}+'&sortDir='+${sortDir}}" class="page-link" href="#">Next</a></li>
+						  </ul>
+						</nav>
+			
+			</div>
+	
+		</div>
+		
+		
+		<script>
+    	
+    	$(document).ready(()=>{
+    	$('.item').removeClass('active');
+    	$('#Books-link').addClass('active');
+    	})
+    	
+    	</script>
+	
+	</section>
+		
+</body>
+</html>

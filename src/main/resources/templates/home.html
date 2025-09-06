@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Home Page</title>
+</head>
+<body>
+
+    <section class="banner d-flex justify-content-center align-items-center">
+    <div class="text-center">
+    
+		    <h1 class="font-weight-bold mb-4">Smart Library Management</h1>
+			
+		    <a href="#" th:href="@{custom_login}">
+		    <button class="btn bg-primary btn-lg text-white">Get Started</button>
+		    </a>
+    
+    </div>
+	
+	</section>
+		
+</body>
+</html>

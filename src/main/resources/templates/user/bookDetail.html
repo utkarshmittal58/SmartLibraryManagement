@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="user/base::layout(~{::section})">
+<head>
+	<meta charset="UTF-8" />
+	<title>Book Details</title>
+</head>
+<body>
+
+    <section>
+    
+    	<div class="card mr-3 ml-3" th:if="${book}">
+    		
+    		<div class="card-body" >
+    			
+    			<div class="container text-center">
+    			
+    				<img src="" style="height: 200px;width: 200px;" class="my_picture" th:src="@{'/image/'+${book.image}}" alt="bookPhoto" />
+    				
+    				<h3 class="mt-3" th:text="${book.name}"></h3>
+    				
+    				
+    				<table class="table">
+					  <thead>
+					    <tr>
+					      <th scope="col">ID</th>
+					      <th scope="col">LMSUSER<span th:text="${book.Bid}"></span></th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Author Name</th>
+					      <td> <span th:text="${book.authorName}"></span> </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Book Cost</th>
+					      <td> <span th:text="${book.cost}"></span> </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Number Of Pages</th>
+					      <td> <span th:text="${book.numofpages}"></span> </td>
+					    </tr>
+					  </tbody>
+					</table>
+					
+					
+					<div th:if="${book.description}" class="container" >
+				
+    				<div class="book_divider"></div>
+    			
+	    			<div class="description">
+	    				<span th:utext="${book.description}"></span>
+	    			</div>
+	    			 
+	    			<div class="book_divider"></div>
+	    			
+	    			</div>
+	    			
+	    			
+	    			<div th:unless="${book.description}" class="container" >
+				
+    				<div class="book_divider"></div>
+    		
+	    			 <p class="text-secondary">No description</p>
+	    			 
+	    			<div class="book_divider"></div>
+	    			
+	    			</div>
+	    			
+	    			
+	    			
+	    			<div class="container mt-3">
+	    				<a th:onclick="|deleteBook(${book.Bid})|"
+	    				class="btn btn-danger btn-block"> Delete</a>
+	    				
+	    				<a th:href="@{'/user/update/'+${book.Bid}}"
+	    				class="btn btn-primary btn-block"> Update</a>
+	    			
+	    			</div>
+   			
+    			</div>
+    		
+    		</div>
+    		    	
+    	</div>
+    	
+		<h1 th:unless="${book}" class="text-center p-3 bg-danger" >You Don't Have Permission to View This Book</h1>
+    	
+
+	</section>
+		
+</body>
+</html>
